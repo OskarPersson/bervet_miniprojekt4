@@ -1,12 +1,22 @@
 %%blablabla
 
+EF(func(x), step) = EF + step * (func(EF));
 
+
+
+
+
+
+weight = 70;
 speed = 0;
 acc = 0;
 
 distance = 0;
 time = 0;
 steps = 0.1;
+
+
+func(t, weight) = (686-0.227*t)/weight;
 
 while (distance < 150 && speed > 0)
     
