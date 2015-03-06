@@ -8,7 +8,10 @@ function res3 = EFcalc2(vect, step, weight, distance)
     function result = func2(X, weight, distance)
         disp(['X: ' num2str(X)]);
         
-        result = (686-(0.227.*(X.^2)) - 10*(distance - 150))/weight;
+        res1 = 686-(0.227.*(X.^2));
+        res2 = 10*(distance - 150);
+        result = (res1 - res2)/weight;
+        %result = (686-(0.227.*(X.^2)) - 10*(distance - 150))/weight;
     end
 
 resultvec1 = [vect(2) (func2(vect(1), weight, distance))];

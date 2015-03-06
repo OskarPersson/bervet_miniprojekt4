@@ -26,7 +26,7 @@ timevec = [];
 distvec = [0];
 firstloop = 1;
 loops = 0;
-%for i = 1:3
+for i = 1:3
 while (distance < 150 && result(1) ~= -Inf) %&& speed > 0
     loops = loops+1;
     result = EFcalc([speed acc], steps, weight);
@@ -75,7 +75,9 @@ while (distance >= 150 && result(1) ~= -Inf) %&& speed > 0
     firstloop = 0;    
 end
 
-%end
+speed = 0;
+acc = 9.8;
+end
 subplot(3, 1, 1);
 plot(timevec, resultvec1);
 
