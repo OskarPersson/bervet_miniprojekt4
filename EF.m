@@ -23,6 +23,7 @@ result = [0 0];
 resultvec1 = [];
 resultvec2 = [];
 timevec = [];
+distvec = [0];
 firstloop = 1;
 loops = 0;
 while (distance < 150 && result(1) ~= -Inf) %&& speed > 0
@@ -45,12 +46,21 @@ timevec = [timevec tid];
 disp(['distance before: ' num2str(distance)]);
     if(firstloop ~= 1)
         distance = distanceCalc(resultvec1, loops, tid);
+        distvec = [distvec distance];
     end
 disp(['distance after: ' num2str(distance)]);    
 firstloop = 0;    
 end 
 
+subplot(3, 1, 1);
 plot(timevec, resultvec1);
+
+subplot(3, 1, 2);
+plot(timevec, resultvec2);
+
+subplot(3, 1, 3);
+plot(timevec, distvec);
+
 %plot(resultvec2, timevec);
 
 disp('speed');
@@ -63,7 +73,7 @@ disp('distance');
 disp(distance);
 
 disp('time');
-disp(time);
+disp(tid);
 
 %%Alldeles för höga värden på farten och acc just nu... KOLLA PÅ DET!
 
