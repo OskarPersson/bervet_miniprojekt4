@@ -8,32 +8,50 @@
 
 weight = 70;
 speed = 0;
-acc = 0;
+acc = 9.8;
 
 distance = 0;
-time = 0;
+tid = 0;
 steps = 0.1;
 
-
+result = [0 0];
 
 %val1 = EFcalc([0.98 10.78], 0.1, weight);
 %val2 = EFcalc(val1, 0.1, weight);
 %disp(val1);
 %disp(val2);
 resultvec1 = [];
+resultvec2 = [];
+timevec = [];
 firstloop = 1;
-while (distance < 150) %&& speed > 0
-
+loops = 0;
+while (distance < 150 && result(1) ~= -Inf) %&& speed > 0
+loops = loops+1;
 result = EFcalc([speed acc], steps, weight);
-resultvec1 = [result resultvec1];
-speed = speed + result(1);
-acc = acc + result(2);
-time = time + steps;
+disp('result:');
+disp(result);
+resultvec1 = [resultvec1 result(1)];
+resultvec2 = [resultvec2 result(2)];
+
+acc = result(2);
+if speed >= 55
+   acc = 0; 
+end
+speed = result(1);
+
+
+tid = tid + steps;
+timevec = [timevec tid];
+disp(['distance before: ' num2str(distance)]);
     if(firstloop ~= 1)
-        distance = distanceCalc(speed, steps, time);
+        distance = distanceCalc(resultvec1, loops, tid);
     end
+disp(['distance after: ' num2str(distance)]);    
 firstloop = 0;    
 end 
+
+plot(timevec, resultvec1);
+%plot(resultvec2, timevec);
 
 disp('speed');
 disp(speed);

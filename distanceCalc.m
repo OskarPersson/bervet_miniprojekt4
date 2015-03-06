@@ -1,8 +1,8 @@
-function dist = distanceCalc(speed, step, time)
+function dist = distanceCalc(speed, loop, tid)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 
-dist = sum(speed)/(time/step);
+dist = (sum(speed)/length(speed))*tid;
 
 end
 
