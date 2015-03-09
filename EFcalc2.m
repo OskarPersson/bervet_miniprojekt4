@@ -6,7 +6,7 @@ function res3 = EFcalc2(vect, step, weight, distance)
 %   Detailed explanation goes here
 
     function result = func2(X, weight, distance)
-        disp(['X: ' num2str(X)]);
+        %disp(['X: ' num2str(X)]);
         
         res1 = 686-(0.227.*(X.^2));
         res2 = 10*(distance - 150);
@@ -26,9 +26,9 @@ res3 = vect + res2;
 %disp('res3:');
 %disp(res3);
 
-disp('---res3---');
-disp(res3);
-disp('----------');
+%disp('---res3---');
+%disp(res3);
+%disp('----------');
 
 
 end

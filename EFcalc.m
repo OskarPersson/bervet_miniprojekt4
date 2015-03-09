@@ -6,9 +6,9 @@ function res3 = EFcalc(vect, step, weight)
 %   Detailed explanation goes here
 
     function result = func(X, weight)
-        disp(['X: ' num2str(X)]);
+        %disp(['X: ' num2str(X)]);
         
-        result = (686-(0.227.*(X.^2)))/weight;
+        result = (686-(0.227.*(X.^2)))./weight;
     end
 
 resultvec1 = [vect(2) (func(vect(1), weight))];
@@ -23,9 +23,9 @@ res3 = vect + res2;
 %disp('res3:');
 %disp(res3);
 
-disp('---res3---');
-disp(res3);
-disp('----------');
+%disp('---res3---');
+%disp(res3);
+%disp('----------');
 
 
 end
