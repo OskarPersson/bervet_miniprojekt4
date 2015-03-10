@@ -1,111 +1,26 @@
-%%blablabla
-
 weight = 70;
-speed = 0;
-acc = 9.8;
-
-distance = 0;
-tid = 0;
-steps = 0.001;
-
-result = [0 0];
-
-%val1 = EFcalc([0.98 10.78], 0.1, weight);
-%val2 = EFcalc(val1, 0.1, weight);
-%disp(val1);
-%disp(val2);
-resultvec1 = [];
-resultvec2 = [];
-timevec = [];
+max = 50000;
+timevec = 1:max;
 distvec = [0];
-firstloop = 1;
-loops = 0;
-for i = 1:3
-disp('====================first while====================');
-while (distance < 150 && result(1) ~= -Inf) %&& speed > 0
-    loops = loops+1;
-    result = EFcalc([speed acc], steps, weight);
-    %disp('result:');
-    %disp(result);
-    resultvec1 = [resultvec1 result(1)];
-    resultvec2 = [resultvec2 result(2)];
+speedvec = [0];
+accvec = [0];
+step = 0.001;
 
-    acc = result(2);
-    if speed >= 55
-       disp(['tid:' num2str(tid)]);
-       disp(['dist:' num2str(distance)]);
-       acc = 0; 
+for i=2:max
+    if (distvec(i-1)<=150)
+        accvec(i) = axcalc(speedvec(i-1), 70);
+        speedvec(i) = speedvec(i-1) + (accvec(i-1) * step);
+        distvec(i) = distvec(i-1) + (step * speedvec(i-1));
+    else
+        accvec(i) = axcalc2(speedvec(i-1), 70, distvec(i-1));
+        speedvec(i) = speedvec(i-1) + (accvec(i-1) * step);
+        distvec(i) = distvec(i-1) + (step * speedvec(i-1));
     end
-    speed = result(1);
-
-    tid = tid + steps;
-    timevec = [timevec tid];
-    %disp(['distance before: ' num2str(distance)]);
-        if(firstloop ~= 1)
-            distance = distanceCalc(resultvec1, loops, tid);
-            distvec = [distvec distance];
-        end
-    %disp(['distance after: ' num2str(distance)]);    
-    firstloop = 0;    
-end
-disp('====================second while====================');
-while (distance >= 150 && result(1) ~= -Inf) %&& speed > 0
-    loops = loops+1;
-    result = EFcalc2([speed acc], steps, weight, distance);
-    %disp('result:');
-    %disp(result);
-    resultvec1 = [resultvec1 result(1)];
-    resultvec2 = [resultvec2 result(2)];
-
-    acc = result(2);
-    if speed <= -55
-       acc = 0; 
-    end
-    speed = result(1);
-
-    tid = tid + steps;
-    timevec = [timevec tid];
-    %disp(['distance before: ' num2str(distance)]);
-        
-            distance = distanceCalc(resultvec1, loops, tid);
-            distvec = [distvec distance];
-        
-    %disp(['distance after: ' num2str(distance)]);    
-    firstloop = 0;    
 end
 
-%speed = 0;
-acc = 9.8;
-end
-subplot(3, 1, 1);
-plot(timevec, resultvec1);
-
-subplot(3, 1, 2);
-plot(timevec, resultvec2);
-
-subplot(3, 1, 3);
+subplot(3,1,1);
+plot(timevec, speedvec);
+subplot(3,1,2);
+plot(timevec, accvec);
+subplot(3,1,3);
 plot(timevec, distvec);
-
-%plot(resultvec2, timevec);
-
-disp('speed');
-disp(speed);
-
-disp('acc');
-disp(acc);
-
-disp('distance');
-disp(distance);
-
-disp('time');
-disp(tid);
-
-%%Alldeles för höga värden på farten och acc just nu... KOLLA PÅ DET!
-
-%%while (acc < 0)
-    
-%%calculate next values with (6)
-
-%%end
-
-%%Maybe save distance values and time in a vect-vect and then plot!! 
