@@ -1,3 +1,3 @@
-function result = func6(x,y, dist)
-    result = (axcalc2(y, 70, dist));
+function result = func6(x,y, dist, weight)
+    result = (axcalc2(y, weight, dist));
 end
